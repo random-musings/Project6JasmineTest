@@ -1,4 +1,14 @@
+/* 
+* class URLTest 
+* this class tests to see if the URL is valid
+*
+*/
 
+/*
+* @public constructor
+* @param {url} the url to the news feed
+* @description create a class to test the URL
+*/
 var URLTest = function(url)
 {
 	this.url = url;
@@ -18,9 +28,7 @@ URLTest.prototype.isValidFormat = function()
 {
 	try
 	{
-		return (this.url.length>0
-			 && (this.url.indexOf("http")===0)
-			);
+		return (this.url.length>0 && (this.url.indexOf("http")===0));
 	}catch(exception)
 	{
 	console.log("exception "+exception);
@@ -29,31 +37,5 @@ URLTest.prototype.isValidFormat = function()
 };
 
 
-/*
-* @public
-* @returns void`
-* @params{callBackFunc}  is called once the ajax request completes
-*/
-URLTest.prototype.isAvailable = function( )
-{
-	try{
-	
-		$.ajax({
-				url: this.url,
-				dataType: "jsonp",
-				type: "GET",
-				cache: true, //very very important disables the _=[timestamp] at the end of the request
-				success: function(data){ this.isAccessible = true;  this.accessibleTestCompleted  = true; },
-				jsonpCallback: this.callBack,
-				error: function (xhr, status, errorThrown) {  this.isAccessible = false;  this.accessibleTestCompleted  = true;}
-			});
-	}catch(exception)
-	{
-		console.log("Exception encountered "+exception);
-		this.accessibleTestCompleted  = true; 
-		this.isAccessible = false;  
-		return false;
-	}
-};
 
 
